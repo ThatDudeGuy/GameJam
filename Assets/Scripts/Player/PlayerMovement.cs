@@ -11,8 +11,8 @@ public class PlayerMovement : MonoBehaviour
     
     public Animator animator;
     public Rigidbody2D rb;
-    private bool isGrounded = true, isJumping;
-    public float jumpForce, duration;
+    public bool isGrounded;
+    public float jumpForce, duration, fallCheck = 10f;
 
     private Vector3 currentPosition;
     private Vector2 pos;
@@ -26,14 +26,28 @@ public class PlayerMovement : MonoBehaviour
         jumpForce = 5f;
         duration = 1.5f;
         animator.SetBool("Moving", true);
+        animator.SetBool("Falling", false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded && !animator.GetBool("Rolling")){
             pos = getPos();
+            fallCheck = jumpForce + pos.y - 0.25f;
+            print(jumpForce + pos.y);
             jump(pos.x, pos.y, jumpForce);
+        }
+        if(Input.GetKeyDown(KeyCode.D) && !animator.GetBool("Jumping")){
+            roll();
+        }
+        if(Input.GetMouseButtonDown(0)){
+            attack();
+        }
+        currentPosition = transform.localPosition;
+        if(currentPosition.y >= fallCheck){
+            animator.SetBool("Jumping", false);
+            animator.SetBool("Falling", true);
         }
         
     }
@@ -44,24 +58,44 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         animator.SetBool("Jumping", false);
+        animator.SetBool("Falling", false);
+        isGrounded = true;
     }
 
+    void OnTriggerExit2D(Collider2D feet)
+    {
+        if(!feet.CompareTag("Floor")){
+            return;
+        }
+        isGrounded = false;
+    }
 
 
 
     private Vector2 getPos(){
-        currentPosition = transform.localPosition;
+        Vector3 currentPosition = transform.localPosition;
         Vector2 myPos = (Vector2)currentPosition;
         return myPos;
     }
 
+    void attack(){
+        animator.SetBool("Attacking", true);
+    }
+    void endAttack(){
+        animator.SetBool("Attacking", false);
+    }
+    void roll(){
+        animator.SetBool("Rolling", true);
+    }
+    void endRoll(){
+        animator.SetBool("Rolling", false);
+    }
+
     void jump(float x, float y, float force){
         if(!isGrounded){
-            isJumping = true;
             animator.SetBool("Jumping", false);
         }
         else if(isGrounded){
-            isJumping = false;
             transform.DOJump(new Vector2(x, y), force, 1, duration, false);
             animator.SetBool("Jumping", true);
         }
