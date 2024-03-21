@@ -1,0 +1,6 @@
+Maybe have some sort of object behind the player that the enemies damage whenever an enemy gets
+past the player without dying.
+
+Or even lose points with each kill missed
+
+Or even a missed kills counter=

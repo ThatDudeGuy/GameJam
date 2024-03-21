@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Floor
   - Enemy
+  - Platform
+  - Skeleton
+  - Mushroom
+  - Flying_Eye
+  - Goblin
   layers:
   - Default
   - TransparentFX
@@ -45,4 +50,7 @@ TagManager:
     locked: 0
   - name: Beam
     uniqueID: 3878189619
+    locked: 0
+  - name: Enemies
+    uniqueID: 2631836749
     locked: 0
