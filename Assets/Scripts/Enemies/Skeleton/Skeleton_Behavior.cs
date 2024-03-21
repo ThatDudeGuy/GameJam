@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Floor_Behavior : MonoBehaviour
+public class Skeleton_Behavior : MonoBehaviour
 {
     public bool resetPosition;
     public Level_Bounds_Behavior bounds;

@@ -11,14 +11,15 @@ public class PlayerMovement : MonoBehaviour
     
     public Animator animator;
     public Rigidbody2D rb;
-    public bool isGrounded;
+    public bool isGrounded, isJumping;
     public float jumpForce, duration, fallCheck = 10f;
 
     private Vector3 currentPosition;
     private Vector2 pos;
 
+    private Sequence myTween;
+    //USE myTween.KILL on the jump animation whenever we collide with a floor object. Being the ground plane or platforms
 
-    // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -29,13 +30,12 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("Falling", false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded && !animator.GetBool("Rolling")){
             pos = getPos();
             fallCheck = jumpForce + pos.y - 0.25f;
-            print(jumpForce + pos.y);
+            //print(jumpForce + pos.y);
             jump(pos.x, pos.y, jumpForce);
         }
         if(Input.GetKeyDown(KeyCode.D) && !animator.GetBool("Jumping")){
@@ -57,20 +57,23 @@ public class PlayerMovement : MonoBehaviour
         if(!feet.CompareTag("Floor")){
             return;
         }
+        print(feet + "ENTER");
         animator.SetBool("Jumping", false);
         animator.SetBool("Falling", false);
         isGrounded = true;
+        isJumping = false;
     }
 
     void OnTriggerExit2D(Collider2D feet)
     {
+        print(feet + "EXIT");
         if(!feet.CompareTag("Floor")){
             return;
         }
-        isGrounded = false;
+        if(isJumping){
+            isGrounded = false;
+        }
     }
-
-
 
     private Vector2 getPos(){
         Vector3 currentPosition = transform.localPosition;
@@ -96,27 +99,9 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Jumping", false);
         }
         else if(isGrounded){
-            transform.DOJump(new Vector2(x, y), force, 1, duration, false);
+            myTween = transform.DOJump(new Vector2(x, y), force, 1, duration, false);
             animator.SetBool("Jumping", true);
+            isJumping = true;
         }
-        // if(isGrounded == true){
-        //     isJumping = true;
-        //     rb.velocity = new Vector2(rb.velocity.x, force * Time.deltaTime);
-        //     jumpTimeCounter = jumpTime;
-        // }
-        // if(Input.GetKeyUp("space") && isGrounded == false){
-        //     animator.SetBool("Falling", true);
-        //     isJumping = false;
-        // }
-        // if(Input.GetKey("space") && isGrounded == false && isJumping == true){
-        //     if(jumpTimeCounter > 0){
-        //         rb.velocity = new Vector2(rb.velocity.x, force * Time.deltaTime);
-        //         jumpTimeCounter -= Time.deltaTime;
-        //         animator.SetBool("Falling", true);
-        //     }
-        //     else{
-        //         isJumping = false;
-        //     }
-        // }
     }
 }
