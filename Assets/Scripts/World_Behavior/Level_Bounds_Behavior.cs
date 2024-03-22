@@ -48,7 +48,10 @@ public class Level_Bounds_Behavior : MonoBehaviour
             floor_2_underworld.resetPosition = true;
         }
 
-        if(other.CompareTag("Skeleton")){
+        if(other.CompareTag("Skeleton") 
+        || other.CompareTag("Mushroom")
+        || other.CompareTag("Flying_Eye")
+        || other.CompareTag("Goblin")){
             Destroy(other.gameObject);
         }
     }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3722099271598080091}
   m_Layer: 0
   m_Name: Goblin
-  m_TagString: Enemy
+  m_TagString: Goblin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1663130547
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1703487858, guid: 14c87f74bcea0424589371950a0d9bc9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -193,4 +193,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77eaf7f95fa730748b1f1b15c094db9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skell_Animator: {fileID: 0}

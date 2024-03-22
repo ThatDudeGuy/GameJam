@@ -4,3 +4,19 @@ past the player without dying.
 Or even lose points with each kill missed
 
 Or even a missed kills counter=
+
+FOR SPAWNING OBJECTS AND ENEMIES
+
+	- On an interval
+		Spawn platforms at random Y locations between a certain range
+		Spawn overworld platforms when the player is in the overworld
+		Inverse, spawn underworld platforms when the player is in the underworld
+		
+	- On an interval
+		There is a 33-40% to spawn an enemy on a platform via random number generator
+		If an enemy spawns on a platform, there is a random number generated from 1-4
+			that will spawn the corresponding enemy based on the underworld and
+			overworld.
+		Any enemy on a platform will be in an idle animation
+		If the enemy is a MUSHROOM or FLYING_EYE or RANGED_ENEMY then they will use only
+		ranged attacks

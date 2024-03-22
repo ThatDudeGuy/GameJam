@@ -12,15 +12,16 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public bool isGrounded, isJumping, dimensionSwitch = false;
     public float jumpForce, duration, fallCheck = 2f;
-    private const float OVERWORLD_Y = 0.31f, X_POS = -0.075f;
+    private const float OVERWORLD_Y = 0.31f;
     private const float UNDERWORLD_Y = -13.8f;
+    public const float X_POS = -0.075f;
     private Vector3 currentPosition;
     private Vector2 pos;
     private Sequence myJumpTween;
     public Tweener  myFallTween;
     private GameObject[] all_Enemies;
     private Animator enemy_Animator;
-    //USE myTween.KILL on the jump animation whenever we collide with a floor object. Being the ground plane or platforms
+    //USE myTween.KILL on the jump animation whenever we collide with a floor object. Be it the ground plane or platforms
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -32,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("Attacking", false);
         transform.localPosition = new Vector3(X_POS, OVERWORLD_Y, 0);
     }
-
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !animator.GetBool("Rolling")){
@@ -46,11 +46,15 @@ public class PlayerMovement : MonoBehaviour
                 jump(pos.x, UNDERWORLD_Y, jumpForce);
             }
         }
-        if(Input.GetKeyDown(KeyCode.D) && !animator.GetBool("Jumping")){
-            dimensionSwitch = !dimensionSwitch;
+        if(Input.GetKeyDown(KeyCode.S) && !animator.GetBool("Jumping") && myFallTween == null){
+            dimensionSwitch = true;
             roll();
         }
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetKeyDown(KeyCode.W) && !animator.GetBool("Jumping") && myFallTween == null){
+            dimensionSwitch = false;
+            roll();
+        }
+        if(Input.GetMouseButtonDown(0) && !animator.GetBool("Hurt")){
             attack();
         }
         currentPosition = transform.localPosition;
@@ -64,18 +68,18 @@ public class PlayerMovement : MonoBehaviour
             myFallTween.OnKill(() => {
                 if(!dimensionSwitch){
                     transform.localPosition = new Vector3(X_POS, OVERWORLD_Y, 0);
+                    myFallTween = null;
                 }
                 else{
                     transform.localPosition = new Vector3(X_POS, UNDERWORLD_Y, 0);
+                    myFallTween = null;
                 }
             });
         }
     }
-
     void OnTriggerEnter2D(Collider2D otherObject)
     {
         if(otherObject.CompareTag("Floor") || otherObject.CompareTag("Platform")){
-            //print(otherObject + "ENTER");
             if(!animator.GetBool("Rolling")){
                 myJumpTween.Kill();
                 myFallTween.Kill();
@@ -86,20 +90,18 @@ public class PlayerMovement : MonoBehaviour
             isJumping = false;
         }
         if(otherObject.CompareTag("Skeleton")){
-            all_Enemies = GameObject.FindGameObjectsWithTag("Skeleton");
-            print(all_Enemies);
-            foreach (var item in all_Enemies)
-            {
-                enemy_Animator = item.GetComponent<Animator>();
-                if(enemy_Animator.GetBool("Attacking")){
-                    animator.SetBool("Hurt", true);
-                    print("Player Has Been Struck");
-                    return;
-                }
-            }
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Skeleton", true);
         }
+        if(otherObject.CompareTag("Mushroom")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Mushroom", true);
+        }
+        // if(otherObject.CompareTag("Flying_Eye")){
+        //     iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Flying_Eye", true);
+        // }
+        // if(otherObject.CompareTag("Goblin")){
+        //     iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Goblin", true);
+        // }
     }
-
     void OnTriggerExit2D(Collider2D otherObject)
     {
         //print(otherObject + "EXIT");
@@ -113,19 +115,35 @@ public class PlayerMovement : MonoBehaviour
             myFallTween = transform.DOMoveY(OVERWORLD_Y, 0.75f, false);
         }
         if(otherObject.CompareTag("Skeleton")){
-            animator.SetBool("Hurt", false);
-            all_Enemies = GameObject.FindGameObjectsWithTag("Skeleton");
-            foreach (var item in all_Enemies)
-            {
-                enemy_Animator = item.GetComponent<Animator>();
-                if(enemy_Animator.GetBool("Attacking")){
-                    enemy_Animator.SetBool("Attacking", false);
-                    return;
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Skeleton", false);
+        }
+        if(otherObject.CompareTag("Mushroom")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Mushroom", false);
+        }
+        // if(otherObject.CompareTag("Flying_Eye")){
+        //     iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Flying_Eye", false);
+        // }
+        // if(otherObject.CompareTag("Goblin")){
+        //     iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Goblin", false);
+        // }
+    }
+    private void iterateEnemies_and_startAttacks(GameObject[] enemies, Animator enemies_Animator, string enemyTag, bool setTrue_OR_False){
+        enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        foreach (var item in enemies)
+        {
+            enemies_Animator = item.GetComponent<Animator>();
+            if(enemies_Animator.GetBool("Death")){
+                return;
+            }
+            if(enemies_Animator.GetBool("Attacking") && !animator.GetBool("Attacking")){
+                animator.SetBool("Hurt", setTrue_OR_False);
+                if(!setTrue_OR_False){
+                    enemies_Animator.SetBool("Attacking", false);
                 }
+                return;
             }
         }
     }
-
     private Vector2 getPos(){
         Vector3 currentPosition = transform.localPosition;
         Vector2 myPos = (Vector2)currentPosition;
@@ -140,6 +158,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void roll(){
         animator.SetBool("Rolling", true);
+        if(myFallTween != null && myFallTween.IsPlaying()){
+            return;
+        }
         if(dimensionSwitch){
             myFallTween = transform.DOMoveY(UNDERWORLD_Y, 1, false);
         }
