@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Level_Bounds_Behavior : MonoBehaviour
@@ -51,7 +48,12 @@ public class Level_Bounds_Behavior : MonoBehaviour
         if(other.CompareTag("Skeleton") 
         || other.CompareTag("Mushroom")
         || other.CompareTag("Flying_Eye")
-        || other.CompareTag("Goblin")){
+        || other.CompareTag("Goblin")
+        || other.CompareTag("Huntress_Spear")
+        || other.CompareTag("Huntress_Bow")
+        || other.CompareTag("Knight_No_Helmet")
+        || other.CompareTag("Platform")
+        || other.CompareTag("Projectile_Underworld")){
             Destroy(other.gameObject);
         }
     }

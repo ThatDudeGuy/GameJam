@@ -11,6 +11,11 @@ TagManager:
   - Mushroom
   - Flying_Eye
   - Goblin
+  - Huntress_Spear
+  - Huntress_Bow
+  - Knight_No_Helmet
+  - Projectile_Underworld
+  - Projectile_Overworld
   layers:
   - Default
   - TransparentFX

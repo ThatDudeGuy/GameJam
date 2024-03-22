@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 3973000486827133673}
   - component: {fileID: 1010818905328441730}
   - component: {fileID: 8695405945610537501}
+  - component: {fileID: 8193953480111178226}
   m_Layer: 0
   m_Name: Projectile_Mushroom
-  m_TagString: Enemy
+  m_TagString: Projectile_Underworld
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,5 +192,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77eaf7f95fa730748b1f1b15c094db9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8193953480111178226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999552584984389660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0733e31926d7ea4438aaae030cf2ca93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

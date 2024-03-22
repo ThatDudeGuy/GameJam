@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class Movement_Speed : MonoBehaviour
 {
-    private const float MOVE_SPEED = 5f;
+    public const float MOVE_SPEED = 5f;
     void Update()
     {
-        transform.Translate(MOVE_SPEED * Time.deltaTime * Vector3.left);
+        if(CompareTag("Platform")){
+            transform.Translate(MOVE_SPEED/2 * Time.deltaTime * Vector3.left);
+        }
+        else{
+            transform.Translate(MOVE_SPEED * Time.deltaTime * Vector3.left);
+        }
     }
 }
