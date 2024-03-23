@@ -7,11 +7,11 @@ public class Level_Bounds_Behavior : MonoBehaviour
     public Vector3 localPosition;
     public Vector3 localScale;
 
-    private void OnTriggerStay2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Underworld_Foreground_LEFT") || other.gameObject.CompareTag("Underworld_Foreground_RIGHT")
         || other.gameObject.CompareTag("Underworld_Background_LEFT") || other.gameObject.CompareTag("Underworld_Background_RIGHT") 
         || other.gameObject.CompareTag("Overworld_Foreground_LEFT") || other.gameObject.CompareTag("Overworld_Foreground_RIGHT")
-        || other.gameObject.CompareTag("Overworld_Background_LEFT") || other.gameObject.CompareTag("Overworld_Foreground_RIGHT")
+        || other.gameObject.CompareTag("Overworld_Background_LEFT") || other.gameObject.CompareTag("Overworld_Background_RIGHT")
         || other.gameObject.CompareTag("middle_Background_Overworld_LEFT") || other.gameObject.CompareTag("middle_Background_Overworld_RIGHT")
         || other.gameObject.CompareTag("far_Background_Overworld_LEFT") || other.gameObject.CompareTag("far_Background_Overworld_RIGHT")
         || other.gameObject.CompareTag("rocks_LEFT") || other.gameObject.CompareTag("rocks_RIGHT")){
@@ -26,7 +26,7 @@ public class Level_Bounds_Behavior : MonoBehaviour
         if(other.gameObject.CompareTag("Underworld_Foreground_LEFT") || other.gameObject.CompareTag("Underworld_Foreground_RIGHT")
         || other.gameObject.CompareTag("Underworld_Background_LEFT") || other.gameObject.CompareTag("Underworld_Background_RIGHT") 
         || other.gameObject.CompareTag("Overworld_Foreground_LEFT") || other.gameObject.CompareTag("Overworld_Foreground_RIGHT")
-        || other.gameObject.CompareTag("Overworld_Background_LEFT") || other.gameObject.CompareTag("Overworld_Foreground_RIGHT")
+        || other.gameObject.CompareTag("Overworld_Background_LEFT") || other.gameObject.CompareTag("Overworld_Background_RIGHT")
         || other.gameObject.CompareTag("middle_Background_Overworld_LEFT") || other.gameObject.CompareTag("middle_Background_Overworld_RIGHT")
         || other.gameObject.CompareTag("far_Background_Overworld_LEFT") || other.gameObject.CompareTag("far_Background_Overworld_RIGHT")
         || other.gameObject.CompareTag("rocks_LEFT") || other.gameObject.CompareTag("rocks_RIGHT")){
@@ -43,7 +43,7 @@ public class Level_Bounds_Behavior : MonoBehaviour
         || other.CompareTag("Huntress_Bow")
         || other.CompareTag("Knight_No_Helmet")
         || other.CompareTag("Platform")
-        || other.CompareTag("Projectile_Underworld")){
+        || other.gameObject.name.Contains("Projectile")){
             Destroy(other.gameObject);
         }
     }

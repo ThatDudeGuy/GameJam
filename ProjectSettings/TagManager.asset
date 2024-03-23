@@ -14,8 +14,6 @@ TagManager:
   - Huntress_Spear
   - Huntress_Bow
   - Knight_No_Helmet
-  - Projectile_Underworld
-  - Projectile_Overworld
   - Bounds
   - Underworld_Foreground_LEFT
   - Underworld_Foreground_RIGHT
@@ -31,6 +29,10 @@ TagManager:
   - far_Background_Overworld_RIGHT
   - rocks_LEFT
   - rocks_RIGHT
+  - Mushroom_shot
+  - Flying_Eye_shot
+  - Huntress_Spear_shot
+  - Huntress_Bow_shot
   layers:
   - Default
   - TransparentFX
@@ -67,6 +69,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: middle
+    uniqueID: 3113915303
+    locked: 0
+  - name: front
+    uniqueID: 1615333341
     locked: 0
   - name: Land
     uniqueID: 3141621311

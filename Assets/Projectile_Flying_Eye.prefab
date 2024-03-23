@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 4384443488879048312}
   - component: {fileID: 2431427365635340566}
   - component: {fileID: 8077844087108187947}
-  - component: {fileID: -3187368900931849400}
+  - component: {fileID: -7514064123702807719}
   m_Layer: 0
   m_Name: Projectile_Flying_Eye
-  m_TagString: Projectile_Underworld
+  m_TagString: Flying_Eye_shot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1663130547
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -968368157, guid: 8faf1c587d3e4ce47b70d1a5287dbd54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77eaf7f95fa730748b1f1b15c094db9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-3187368900931849400
+--- !u!114 &-7514064123702807719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,6 +203,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2203634672942070946}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef373f3b1ddefa644a1944f1b4f1decf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0733e31926d7ea4438aaae030cf2ca93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

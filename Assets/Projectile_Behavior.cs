@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile_Flying_Eye_Behaviour : MonoBehaviour
+public class Projectile_Behaviour : MonoBehaviour
 {
     private const float MOVE_SPEED_X = 3.75f;
     private const float MOVE_SPEED_Y = 1f;
@@ -12,7 +12,12 @@ public class Projectile_Flying_Eye_Behaviour : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(MOVE_SPEED_X * Time.deltaTime * Vector3.left);
+        if(CompareTag("Flying_Eye_shot")){
+            transform.Translate(MOVE_SPEED_X * 2 * Time.deltaTime * Vector3.left);
+        }
+        else{
+            transform.Translate(MOVE_SPEED_X * Time.deltaTime * Vector3.left);
+        }
 
         if(Player.transform.localPosition.y >= transform.localPosition.y && gameObject != null && Player.gameObject != null){
             transform.Translate(MOVE_SPEED_Y * Time.deltaTime * Vector3.up);
@@ -24,7 +29,7 @@ public class Projectile_Flying_Eye_Behaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")){
-            if(CompareTag("Projectile_Underworld")){
+            if(name.Contains("Projectile")){
                 animator.SetBool("Hit", true);
             }
         }

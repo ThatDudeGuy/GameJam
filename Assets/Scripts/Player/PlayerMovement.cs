@@ -87,13 +87,12 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D otherObject)
     {
-        //|| otherObject.CompareTag("Floor")
         if(otherObject.CompareTag("Underworld_Foreground_LEFT") || otherObject.CompareTag("Underworld_Foreground_RIGHT") 
         || otherObject.CompareTag("Overworld_Foreground_LEFT") || otherObject.CompareTag("Overworld_Foreground_RIGHT")
         || otherObject.CompareTag("Platform")){
 
             if(!animator.GetBool("Rolling")){
-                print("Canceled JUMP " +otherObject+ " Killed Tween");
+                //print("Canceled JUMP " +otherObject+ " Killed Tween");
                 myJumpTween.Kill();
                 myFallTween.Kill();
             }
@@ -199,5 +198,4 @@ public class PlayerMovement : MonoBehaviour
             isJumping = true;
         }
     }
-
 }
