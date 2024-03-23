@@ -1,5 +1,6 @@
 Controls
 
 / Jump = Spacebar
-/ Roll = D (currently)
+/ Stage Transition down = S
+/ Stage Transition up = w
 / Attack = Left Mouse Button
