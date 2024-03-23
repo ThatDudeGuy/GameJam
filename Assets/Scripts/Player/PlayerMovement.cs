@@ -46,11 +46,19 @@ public class PlayerMovement : MonoBehaviour
                 jump(pos.x, UNDERWORLD_Y, jumpForce);
             }
         }
-        if(Input.GetKeyDown(KeyCode.S) && !animator.GetBool("Jumping") && myFallTween == null){
+        if(Input.GetKeyDown(KeyCode.S) && dimensionSwitch == true){
+            //play error sound here
+            print("Already in underworld");
+        }
+        else if(Input.GetKeyDown(KeyCode.S) && !animator.GetBool("Jumping") && myFallTween == null && !animator.GetBool("Falling")){
             dimensionSwitch = true;
             roll();
         }
-        if(Input.GetKeyDown(KeyCode.W) && !animator.GetBool("Jumping") && myFallTween == null){
+        if(Input.GetKeyDown(KeyCode.W) && dimensionSwitch == false){
+            //play error sound here
+            print("Already in overworld");
+        }
+        else if(Input.GetKeyDown(KeyCode.W) && !animator.GetBool("Jumping") && myFallTween == null && !animator.GetBool("Falling")){
             dimensionSwitch = false;
             roll();
         }
@@ -79,8 +87,13 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D otherObject)
     {
-        if(otherObject.CompareTag("Floor") || otherObject.CompareTag("Platform")){
+        //|| otherObject.CompareTag("Floor")
+        if(otherObject.CompareTag("Underworld_Foreground_LEFT") || otherObject.CompareTag("Underworld_Foreground_RIGHT") 
+        || otherObject.CompareTag("Overworld_Foreground_LEFT") || otherObject.CompareTag("Overworld_Foreground_RIGHT")
+        || otherObject.CompareTag("Platform")){
+
             if(!animator.GetBool("Rolling")){
+                print("Canceled JUMP " +otherObject+ " Killed Tween");
                 myJumpTween.Kill();
                 myFallTween.Kill();
             }
@@ -95,17 +108,20 @@ public class PlayerMovement : MonoBehaviour
         if(otherObject.CompareTag("Mushroom")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Mushroom", true);
         }
-        // if(otherObject.CompareTag("Flying_Eye")){
-        //     iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Flying_Eye", true);
-        // }
-        // if(otherObject.CompareTag("Goblin")){
-        //     iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Goblin", true);
-        // }
+        if(otherObject.CompareTag("Flying_Eye")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Flying_Eye", true);
+        }
+        if(otherObject.CompareTag("Goblin")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Goblin", true);
+        }
     }
     void OnTriggerExit2D(Collider2D otherObject)
     {
         //print(otherObject + "EXIT");
-        if(otherObject.CompareTag("Floor") || otherObject.CompareTag("Platform")){
+        if(otherObject.CompareTag("Underworld_Foreground_LEFT") || otherObject.CompareTag("Underworld_Foreground_RIGHT") 
+        || otherObject.CompareTag("Overworld_Foreground_LEFT") || otherObject.CompareTag("Overworld_Foreground_RIGHT")
+        || otherObject.CompareTag("Platform")){
+
             if(isJumping){
                 isGrounded = false;
             }
@@ -120,12 +136,12 @@ public class PlayerMovement : MonoBehaviour
         if(otherObject.CompareTag("Mushroom")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Mushroom", false);
         }
-        // if(otherObject.CompareTag("Flying_Eye")){
-        //     iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Flying_Eye", false);
-        // }
-        // if(otherObject.CompareTag("Goblin")){
-        //     iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Goblin", false);
-        // }
+        if(otherObject.CompareTag("Flying_Eye")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Flying_Eye", false);
+        }
+        if(otherObject.CompareTag("Goblin")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Goblin", false);
+        }
     }
     private void iterateEnemies_and_startAttacks(GameObject[] enemies, Animator enemies_Animator, string enemyTag, bool setTrue_OR_False){
         enemies = GameObject.FindGameObjectsWithTag(enemyTag);

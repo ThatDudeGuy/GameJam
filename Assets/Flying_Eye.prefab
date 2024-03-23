@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5261426593193592563}
   - component: {fileID: 8551054285255839531}
   - component: {fileID: 5517618695231188231}
+  - component: {fileID: -1477435596017173897}
   m_Layer: 0
   m_Name: Flying_Eye
   m_TagString: Flying_Eye
@@ -193,3 +194,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77eaf7f95fa730748b1f1b15c094db9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1477435596017173897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342203560705456081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9397242f6833964b98181da053f54ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mush_projectile: {fileID: 2203634672942070946, guid: 67c1c693d20988d46a96ae5bffddc6c5, type: 3}

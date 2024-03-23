@@ -1,9 +1,6 @@
-Maybe have some sort of object behind the player that the enemies damage whenever an enemy gets
-past the player without dying.
-
 Or even lose points with each kill missed
 
-Or even a missed kills counter=
+Or even a missed kills counter
 
 FOR SPAWNING OBJECTS AND ENEMIES
 
@@ -20,3 +17,21 @@ FOR SPAWNING OBJECTS AND ENEMIES
 		Any enemy on a platform will be in an idle animation
 		If the enemy is a MUSHROOM or FLYING_EYE or RANGED_ENEMY then they will use only
 		ranged attacks
+
+	- When spawning platforms
+		when the final one is spawned, spawn a coin right above its location to
+		incentivize the player to jump up the platforms
+
+
+	- CORE LOOP
+		endless run, dodge, and kill enemies to rack up points
+
+		different ending for different point values. if the player has 100 or less points
+		the bad ennding screen shows, could just be some text. They didnt successfully
+		200-600 points they have defended succesfully
+		601 > they have annihilated the enemy
+
+		once the player has survived 2-3 waves in the overworld, beams from hell
+		will be the only things spawning in the world until the player defeats 3 mushroom
+		enemies. Once the objective is fulfilled, many enemies will spawn in the underworld
+		until the player goes back to the overworld

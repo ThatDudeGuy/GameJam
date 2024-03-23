@@ -16,6 +16,21 @@ TagManager:
   - Knight_No_Helmet
   - Projectile_Underworld
   - Projectile_Overworld
+  - Bounds
+  - Underworld_Foreground_LEFT
+  - Underworld_Foreground_RIGHT
+  - Underworld_Background_LEFT
+  - Underworld_Background_RIGHT
+  - Overworld_Foreground_LEFT
+  - Overworld_Foreground_RIGHT
+  - Overworld_Background_LEFT
+  - Overworld_Background_RIGHT
+  - middle_Background_Overworld_LEFT
+  - middle_Background_Overworld_RIGHT
+  - far_Background_Overworld_LEFT
+  - far_Background_Overworld_RIGHT
+  - rocks_LEFT
+  - rocks_RIGHT
   layers:
   - Default
   - TransparentFX
@@ -52,6 +67,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Land
+    uniqueID: 3141621311
     locked: 0
   - name: Beam
     uniqueID: 3878189619

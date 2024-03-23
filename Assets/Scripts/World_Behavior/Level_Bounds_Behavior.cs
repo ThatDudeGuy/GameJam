@@ -1,50 +1,40 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Level_Bounds_Behavior : MonoBehaviour
 {
-    public Floor_Behavior floor_1_overworld;
-    public Floor_Behavior floor_2_overworld;
-    public Floor_Behavior floor_1_underworld;
-    public Floor_Behavior floor_2_underworld;
+    private Floor_Behavior under_Floor;
     public Vector3 localPosition;
     public Vector3 localScale;
-    
-    private void Start() {
-        localPosition = transform.localPosition;
-        localScale = transform.localScale;
-    }
 
     private void OnTriggerStay2D(Collider2D other) {
-        if(other.name == "floor_1_overworld"){
-            floor_1_overworld.resetPosition = false;
-        }
-        if(other.name == "floor_2_overworld"){
-            floor_2_overworld.resetPosition = false;
-        }
-        if(other.name == "floor_1_underworld"){
-            floor_1_underworld.resetPosition = false;
-        }
-        if(other.name == "floor_2_underworld"){
-            floor_2_underworld.resetPosition = false;
+        if(other.gameObject.CompareTag("Underworld_Foreground_LEFT") || other.gameObject.CompareTag("Underworld_Foreground_RIGHT")
+        || other.gameObject.CompareTag("Underworld_Background_LEFT") || other.gameObject.CompareTag("Underworld_Background_RIGHT") 
+        || other.gameObject.CompareTag("Overworld_Foreground_LEFT") || other.gameObject.CompareTag("Overworld_Foreground_RIGHT")
+        || other.gameObject.CompareTag("Overworld_Background_LEFT") || other.gameObject.CompareTag("Overworld_Foreground_RIGHT")
+        || other.gameObject.CompareTag("middle_Background_Overworld_LEFT") || other.gameObject.CompareTag("middle_Background_Overworld_RIGHT")
+        || other.gameObject.CompareTag("far_Background_Overworld_LEFT") || other.gameObject.CompareTag("far_Background_Overworld_RIGHT")
+        || other.gameObject.CompareTag("rocks_LEFT") || other.gameObject.CompareTag("rocks_RIGHT")){
+            under_Floor = other.gameObject.GetComponent<Floor_Behavior>();
+            if (under_Floor != null) {
+                under_Floor.resetPosition = false;
+            }
         }
     }
-
     private void OnTriggerExit2D(Collider2D other){
-        // print("Object " + other +" has left");
-        // print("Goodbye");
-        if(other.name == "floor_1_overworld"){
-            floor_1_overworld.resetPosition = true;
+        //|| other.name == "floor_1_overworld" || other.name == "floor_2_overworld"
+        if(other.gameObject.CompareTag("Underworld_Foreground_LEFT") || other.gameObject.CompareTag("Underworld_Foreground_RIGHT")
+        || other.gameObject.CompareTag("Underworld_Background_LEFT") || other.gameObject.CompareTag("Underworld_Background_RIGHT") 
+        || other.gameObject.CompareTag("Overworld_Foreground_LEFT") || other.gameObject.CompareTag("Overworld_Foreground_RIGHT")
+        || other.gameObject.CompareTag("Overworld_Background_LEFT") || other.gameObject.CompareTag("Overworld_Foreground_RIGHT")
+        || other.gameObject.CompareTag("middle_Background_Overworld_LEFT") || other.gameObject.CompareTag("middle_Background_Overworld_RIGHT")
+        || other.gameObject.CompareTag("far_Background_Overworld_LEFT") || other.gameObject.CompareTag("far_Background_Overworld_RIGHT")
+        || other.gameObject.CompareTag("rocks_LEFT") || other.gameObject.CompareTag("rocks_RIGHT")){
+            under_Floor = other.gameObject.GetComponent<Floor_Behavior>();
+            if (under_Floor != null) {
+                under_Floor.resetPosition = true;
+            }
         }
-        if(other.name == "floor_2_overworld"){
-            floor_2_overworld.resetPosition = true;
-        }
-        if(other.name == "floor_1_underworld"){
-            floor_1_underworld.resetPosition = true;
-        }
-        if(other.name == "floor_2_underworld"){
-            floor_2_underworld.resetPosition = true;
-        }
-
         if(other.CompareTag("Skeleton") 
         || other.CompareTag("Mushroom")
         || other.CompareTag("Flying_Eye")
@@ -57,5 +47,4 @@ public class Level_Bounds_Behavior : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-    
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4384443488879048312}
   - component: {fileID: 2431427365635340566}
   - component: {fileID: 8077844087108187947}
+  - component: {fileID: -3187368900931849400}
   m_Layer: 0
   m_Name: Projectile_Flying_Eye
   m_TagString: Projectile_Underworld
@@ -191,5 +192,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77eaf7f95fa730748b1f1b15c094db9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3187368900931849400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203634672942070946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef373f3b1ddefa644a1944f1b4f1decf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

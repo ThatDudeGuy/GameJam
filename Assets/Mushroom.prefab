@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6204327034472567234}
   - component: {fileID: 7887745032936604789}
   - component: {fileID: 8683194853129019493}
+  - component: {fileID: -7046773050006765359}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Mushroom
@@ -193,3 +194,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77eaf7f95fa730748b1f1b15c094db9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7046773050006765359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902214195198303394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9397242f6833964b98181da053f54ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mush_projectile: {fileID: 999552584984389660, guid: 9c6d3c1906b7238419e08e7b4f1792b3, type: 3}
