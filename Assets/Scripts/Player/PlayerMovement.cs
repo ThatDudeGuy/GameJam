@@ -113,6 +113,18 @@ public class PlayerMovement : MonoBehaviour
         if(otherObject.CompareTag("Goblin")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Goblin", true);
         }
+        if(otherObject.CompareTag("Knight_No_Helmet")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Knight_No_Helmet", true);
+        }
+        if(otherObject.CompareTag("Knight_Full_Armor")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Knight_Full_Armor", true);
+        }
+        if(otherObject.CompareTag("Huntress_Spear")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Huntress_Spear", true);
+        }
+        if(otherObject.CompareTag("Huntress_Bow")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Huntress_Bow", true);
+        }
     }
     void OnTriggerExit2D(Collider2D otherObject)
     {
@@ -140,6 +152,18 @@ public class PlayerMovement : MonoBehaviour
         }
         if(otherObject.CompareTag("Goblin")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Goblin", false);
+        }
+        if(otherObject.CompareTag("Knight_No_Helmet")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Knight_No_Helmet", false);
+        }
+        if(otherObject.CompareTag("Knight_Full_Armor")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Knight_Full_Armor", false);
+        }
+        if(otherObject.CompareTag("Huntress_Spear")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Huntress_Spear", false);
+        }
+        if(otherObject.CompareTag("Huntress_Bow")){
+            iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Huntress_Bow", true);
         }
     }
     private void iterateEnemies_and_startAttacks(GameObject[] enemies, Animator enemies_Animator, string enemyTag, bool setTrue_OR_False){

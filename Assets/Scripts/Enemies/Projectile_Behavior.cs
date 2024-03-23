@@ -30,14 +30,23 @@ public class Projectile_Behaviour : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")){
             if(name.Contains("Projectile")){
-                animator.SetBool("Hit", true);
+                foreach (AnimatorControllerParameter parameter in animator.parameters)
+                {
+                    if (parameter.type == AnimatorControllerParameterType.Bool && parameter.name == "Hit")
+                    {
+                        animator.SetBool("Hit", true);
+                    }
+                    else{
+                        Destroy(gameObject);
+                    }
+                }
             }
         }
     }
 
-    void myDestroy(){
+    void myDestroy(){ 
         if(animator.GetBool("Hit")){
             Destroy(gameObject);
-        }
+        }        
     }
 }

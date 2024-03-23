@@ -42,6 +42,7 @@ public class Level_Bounds_Behavior : MonoBehaviour
         || other.CompareTag("Huntress_Spear")
         || other.CompareTag("Huntress_Bow")
         || other.CompareTag("Knight_No_Helmet")
+        || other.CompareTag("Knight_Full_Armor")
         || other.CompareTag("Platform")
         || other.gameObject.name.Contains("Projectile")){
             Destroy(other.gameObject);

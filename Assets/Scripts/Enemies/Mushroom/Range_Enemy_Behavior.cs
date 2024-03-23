@@ -8,12 +8,14 @@ public class Range_Enemy_Behavior : MonoBehaviour
     private int shotLimit, shotCount = 0;
 
     private void Start() {
-        if(CompareTag("Flying_Eye")){
-            print("EYE");
+        if(CompareTag("Flying_Eye") || CompareTag("Huntress_Spear")){
             shotLimit = 5;
         }
         else if(CompareTag("Mushroom")){
             shotLimit = 3;
+        }
+        else if(CompareTag("Huntress_Bow")){
+            shotLimit = 10;
         }
     }
     void Update()
@@ -22,14 +24,9 @@ public class Range_Enemy_Behavior : MonoBehaviour
     }
 
     void spawn(){
-        //print(shotLimit+", "+shotCount);
         if(shotCount < shotLimit){
             Instantiate(myProjectile, spawnPosition, Quaternion.identity);
             shotCount++;
         }
     }
-
-//     public void move(){
-//         transform.Translate(SKELL_SPEED * Time.deltaTime * Vector3.left);
-//     }
 }

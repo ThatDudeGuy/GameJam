@@ -33,6 +33,7 @@ TagManager:
   - Flying_Eye_shot
   - Huntress_Spear_shot
   - Huntress_Bow_shot
+  - Knight_Full_Armor
   layers:
   - Default
   - TransparentFX
