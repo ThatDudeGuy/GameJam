@@ -3,10 +3,11 @@ using UnityEngine;
 public class Movement_Speed : MonoBehaviour
 {
     public const float MOVE_SPEED = 5f;
+    public float platformSpeed;
     void Update()
     {
         if(CompareTag("Platform")){
-            transform.Translate(MOVE_SPEED/2 * Time.deltaTime * Vector3.left);
+            transform.Translate(platformSpeed * Time.deltaTime * Vector3.left);
         }
         else if(CompareTag("Underworld_Background_LEFT") || CompareTag("Underworld_Background_RIGHT") 
                 || CompareTag("Overworld_Background_LEFT") || CompareTag("Overworld_Background_RIGHT")){

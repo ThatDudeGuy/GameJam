@@ -139,7 +139,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -194,6 +194,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77eaf7f95fa730748b1f1b15c094db9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy_Animator: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  spawnMelee: 0
+  dont_Move: 0
 --- !u!114 &-993901564261252089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,4 +210,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9397242f6833964b98181da053f54ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myProjectile: {fileID: 0}
+  myProjectile: {fileID: 654890831939049442, guid: 27c837eefb124ca42baa7595ba58aef7, type: 3}

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
 using DG.Tweening;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
@@ -9,7 +6,6 @@ using Vector2 = UnityEngine.Vector2;
 public class PlayerMovement : MonoBehaviour
 {
     public Animator animator;
-    public Rigidbody2D rb;
     public bool isGrounded, isJumping, dimensionSwitch = false;
     public float jumpForce, duration, fallCheck = 2f;
     private const float OVERWORLD_Y = 0.31f;
@@ -87,9 +83,22 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D otherObject)
     {
+        if(otherObject.CompareTag("Platform")){
+            if(transform.localPosition.y >= otherObject.bounds.max.y && animator.GetBool("Falling")){
+                myJumpTween.Kill();
+                myFallTween.Kill();
+                animator.SetBool("Jumping", false);
+                animator.SetBool("Falling", false);
+                isGrounded = true;
+                isJumping = false;
+            }
+            // else{
+            //     return;
+            // }
+        }
+
         if(otherObject.CompareTag("Underworld_Foreground_LEFT") || otherObject.CompareTag("Underworld_Foreground_RIGHT") 
-        || otherObject.CompareTag("Overworld_Foreground_LEFT") || otherObject.CompareTag("Overworld_Foreground_RIGHT")
-        || otherObject.CompareTag("Platform")){
+        || otherObject.CompareTag("Overworld_Foreground_LEFT") || otherObject.CompareTag("Overworld_Foreground_RIGHT")){
 
             if(!animator.GetBool("Rolling")){
                 //print("Canceled JUMP " +otherObject+ " Killed Tween");

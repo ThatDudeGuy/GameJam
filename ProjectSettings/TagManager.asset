@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Floor
   - Enemy
-  - Platform
   - Skeleton
   - Mushroom
   - Flying_Eye
@@ -34,6 +33,10 @@ TagManager:
   - Huntress_Spear_shot
   - Huntress_Bow_shot
   - Knight_Full_Armor
+  - Spawn_Overworld
+  - Spawn_Underworld
+  - platform_Underworld
+  - platform_Overworld
   layers:
   - Default
   - TransparentFX
