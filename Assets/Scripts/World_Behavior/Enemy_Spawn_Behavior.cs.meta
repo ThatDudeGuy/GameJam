@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ea01b1beb0e3d5245a0e7ef439b39ed1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Knight_Full_Armor: {fileID: 7169335044556185685, guid: ef088f7353e8db841aedeaaa7b87ce80, type: 3}
+  - Knight_No_Helmet: {fileID: 215015288436525617, guid: 6a2901761c914a845bed2e864b23d661, type: 3}
+  - Huntress_Spear: {fileID: 3478907497158884394, guid: e15fe2cff92e9b6439fc926bad22424e, type: 3}
+  - Huntress_Bow: {fileID: 9081014583735329928, guid: 2abfb633d22c72e4087e1086ec080cba, type: 3}
+  - Mushroom: {fileID: 2902214195198303394, guid: cd2da8d9cec6e1346a2b3e72cf851e8f, type: 3}
+  - Goblin: {fileID: 6122222446726085210, guid: 43f45aa8cf24f4b4ab8fe1e3eed22035, type: 3}
+  - Flying_Eye: {fileID: 1342203560705456081, guid: 953e0c38df15d764daf47d8d4fb5ef7e, type: 3}
+  - Skeleton: {fileID: 6999566575850375809, guid: 9cd3b860221bf034dbff491ade708e91, type: 3}
+  - platformOver: {fileID: 9000066506828077694, guid: e7c87f404326b794d8aba2658ac62d89, type: 3}
+  - platformUnder: {fileID: 6982088148015477111, guid: 97bcaec7db1ca2f47b37112f0c116eec, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

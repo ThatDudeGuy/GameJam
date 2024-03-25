@@ -6,7 +6,7 @@ public class Movement_Speed : MonoBehaviour
     public float platformSpeed;
     void Update()
     {
-        if(CompareTag("Platform")){
+        if(name.Contains("Platform")){
             transform.Translate(platformSpeed * Time.deltaTime * Vector3.left);
         }
         else if(CompareTag("Underworld_Background_LEFT") || CompareTag("Underworld_Background_RIGHT") 

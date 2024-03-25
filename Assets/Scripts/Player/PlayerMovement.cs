@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public Tweener  myFallTween;
     private GameObject[] all_Enemies;
     private Animator enemy_Animator;
+    public AudioSource swordSwing;
     //USE myTween.KILL on the jump animation whenever we collide with a floor object. Be it the ground plane or platforms
     void Start()
     {
@@ -83,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D otherObject)
     {
-        if(otherObject.CompareTag("Platform")){
+        if(otherObject.gameObject.name.Contains("Platform")){
             if(transform.localPosition.y >= otherObject.bounds.max.y && animator.GetBool("Falling")){
                 myJumpTween.Kill();
                 myFallTween.Kill();
@@ -140,13 +141,13 @@ public class PlayerMovement : MonoBehaviour
         //print(otherObject + "EXIT");
         if(otherObject.CompareTag("Underworld_Foreground_LEFT") || otherObject.CompareTag("Underworld_Foreground_RIGHT") 
         || otherObject.CompareTag("Overworld_Foreground_LEFT") || otherObject.CompareTag("Overworld_Foreground_RIGHT")
-        || otherObject.CompareTag("Platform")){
+        || otherObject.name.Contains("Platform")){
 
             if(isJumping){
                 isGrounded = false;
             }
         } 
-        if(otherObject.CompareTag("Platform") && !isJumping){
+        if(otherObject.name.Contains("Platform") && !isJumping){
             animator.SetBool("Falling", true);
             myFallTween = transform.DOMoveY(OVERWORLD_Y, 0.75f, false);
         }
@@ -200,6 +201,7 @@ public class PlayerMovement : MonoBehaviour
 
     void attack(){
         animator.SetBool("Attacking", true);
+        swordSwing.Play();
     }
     void endAttack(){
         animator.SetBool("Attacking", false);

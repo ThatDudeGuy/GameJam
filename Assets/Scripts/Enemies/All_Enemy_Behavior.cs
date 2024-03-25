@@ -17,11 +17,7 @@ public class All_Enemy_Behavior : MonoBehaviour
         playerAnimator = Player.GetComponent<Animator>();
         meleeDistance = new Vector3(2,0,0);
         rangeDistance = new Vector3(13,0,0);
-        if(!dont_Move){
-            if(CompareTag("Skeleton") || CompareTag("Goblin") || CompareTag("Knight_No_Helmet") || CompareTag("Knight_Full_Armor")){
-                enemy_Animator.SetBool("Moving", true);
-            }
-        }
+        
     }
     private void Awake() {
         try{
@@ -35,6 +31,11 @@ public class All_Enemy_Behavior : MonoBehaviour
     }
     void Update()
     {
+        if(!dont_Move){
+            if(CompareTag("Skeleton") || CompareTag("Goblin") || CompareTag("Knight_No_Helmet") || CompareTag("Knight_Full_Armor")){
+                enemy_Animator.SetBool("Moving", true);
+            }
+        }
         if(enemy_Animator.GetBool("Death") && !dont_Move){
             transform.Translate(5 * Time.deltaTime * Vector3.left);
         }
