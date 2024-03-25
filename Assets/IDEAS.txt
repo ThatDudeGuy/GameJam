@@ -34,4 +34,4 @@ FOR SPAWNING OBJECTS AND ENEMIES
 		once the player has survived 2-3 waves in the overworld, beams from hell
 		will be the only things spawning in the world until the player defeats 3 mushroom
 		enemies. Once the objective is fulfilled, many enemies will spawn in the underworld
-		until the player goes back to the overworld
+		until the player goes back to the overworld and the beams will cease to spawn.

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6047997402828727443, guid: 137db3594ee2e9d45b5d8c3768761ae4, type: 3}
+      propertyPath: demon_beam
+      value: 
+      objectReference: {fileID: 392473803133750450, guid: aeb92f58c4d819841818482f847fb5de, type: 3}
     - target: {fileID: 6747325940131106801, guid: 137db3594ee2e9d45b5d8c3768761ae4, type: 3}
       propertyPath: m_Name
       value: Range_Spawner Variant

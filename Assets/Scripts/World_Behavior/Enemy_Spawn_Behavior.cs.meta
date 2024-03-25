@@ -14,6 +14,8 @@ MonoImporter:
   - Skeleton: {fileID: 6999566575850375809, guid: 9cd3b860221bf034dbff491ade708e91, type: 3}
   - platformOver: {fileID: 9000066506828077694, guid: e7c87f404326b794d8aba2658ac62d89, type: 3}
   - platformUnder: {fileID: 6982088148015477111, guid: 97bcaec7db1ca2f47b37112f0c116eec, type: 3}
+  - demon_beam: {fileID: 392473803133750450, guid: aeb92f58c4d819841818482f847fb5de, type: 3}
+  - player: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

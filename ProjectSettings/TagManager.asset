@@ -89,3 +89,9 @@ TagManager:
   - name: Enemies
     uniqueID: 2631836749
     locked: 0
+  - name: Menu
+    uniqueID: 3626818761
+    locked: 0
+  - name: Buttons
+    uniqueID: 265508671
+    locked: 0

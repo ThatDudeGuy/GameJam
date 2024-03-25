@@ -2,22 +2,26 @@ using DG.Tweening;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
     public Animator animator;
-    public bool isGrounded, isJumping, dimensionSwitch = false;
-    public float jumpForce, duration, fallCheck = 2f;
+    public string nextSceneName = "endScreen";
+    public bool isGrounded, isJumping, dimensionSwitch = false, can_switch = false, win = false;
+    public float jumpForce, duration, fallCheck = 2f, hit_points;
     private const float OVERWORLD_Y = 0.31f;
     private const float UNDERWORLD_Y = -13.8f;
     public const float X_POS = -0.075f;
+    public int noMore = 0, scoreValue;
     private Vector3 currentPosition;
     private Vector2 pos;
     private Sequence myJumpTween;
     public Tweener  myFallTween;
-    private GameObject[] all_Enemies;
+    private GameObject[] all_Enemies, spawnUnder, spawnOver, winCheck, switch_check;
+    public int wcLength;
     private Animator enemy_Animator;
-    public AudioSource swordSwing;
+    public AudioSource swordSwing, jump_grunt;
     //USE myTween.KILL on the jump animation whenever we collide with a floor object. Be it the ground plane or platforms
     void Start()
     {
@@ -25,13 +29,37 @@ public class PlayerMovement : MonoBehaviour
         DOTween.Init();
         jumpForce = 5f;
         duration = 1.5f;
+        hit_points = 200f;
+        scoreValue = 0;
         animator.SetBool("Moving", true);
         animator.SetBool("Falling", false);
         animator.SetBool("Attacking", false);
         transform.localPosition = new Vector3(X_POS, OVERWORLD_Y, 0);
     }
     void Update()
-    {
+    {   
+        winCheck = GameObject.FindGameObjectsWithTag("platform_Overworld");
+        wcLength = winCheck.Length;
+        switch_check = GameObject.FindGameObjectsWithTag("platform_Underworld");
+        if(switch_check.Length == 0 && noMore == 1){
+            can_switch = false;
+        }
+        if(winCheck.Length == 0 && noMore > 1){
+            win = true;
+        }
+        if(can_switch){
+            print("jumping = "+animator.GetBool("Jumping")+ " tween = "+myFallTween == null+" falling = "+animator.GetBool("Falling"));
+        }
+        if(win){
+            print("Switching screens");
+            SceneManager.UnloadSceneAsync("Game");
+            SceneManager.LoadScene("winScreen");
+        }
+        if(hit_points <= 0){
+            SceneManager.UnloadSceneAsync("Game");
+            SceneManager.LoadScene("loseScreen");
+        }
+        
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !animator.GetBool("Rolling")){
             pos = getPos();
             fallCheck = jumpForce + pos.y - 1f;
@@ -43,21 +71,33 @@ public class PlayerMovement : MonoBehaviour
                 jump(pos.x, UNDERWORLD_Y, jumpForce);
             }
         }
-        if(Input.GetKeyDown(KeyCode.S) && dimensionSwitch == true){
-            //play error sound here
-            print("Already in underworld");
-        }
-        else if(Input.GetKeyDown(KeyCode.S) && !animator.GetBool("Jumping") && myFallTween == null && !animator.GetBool("Falling")){
-            dimensionSwitch = true;
-            roll();
-        }
-        if(Input.GetKeyDown(KeyCode.W) && dimensionSwitch == false){
-            //play error sound here
-            print("Already in overworld");
-        }
-        else if(Input.GetKeyDown(KeyCode.W) && !animator.GetBool("Jumping") && myFallTween == null && !animator.GetBool("Falling")){
-            dimensionSwitch = false;
-            roll();
+        if(noMore <= 1){
+            if(Input.GetKeyDown(KeyCode.S) && dimensionSwitch == true && can_switch){
+                //play error sound here
+                print("Already in underworld");
+            }
+            else if(Input.GetKeyDown(KeyCode.S) && !animator.GetBool("Jumping") && myFallTween == null && !animator.GetBool("Falling") && can_switch){
+                noMore++;
+                dimensionSwitch = true;
+                roll();
+                spawnUnder = GameObject.FindGameObjectsWithTag("Spawn_Underworld");
+                foreach(var spawner in spawnUnder) {
+                    spawner.GetComponent<Enemy_Spawn_Behavior>().Start();
+                }
+            }
+            if(Input.GetKeyDown(KeyCode.W) && dimensionSwitch == false && !can_switch){
+                //play error sound here
+                print("Already in overworld");
+            }
+            else if(Input.GetKeyDown(KeyCode.W) && !animator.GetBool("Jumping") && myFallTween == null && !animator.GetBool("Falling") && !can_switch){
+                noMore++;
+                dimensionSwitch = false;
+                roll();
+                spawnOver = GameObject.FindGameObjectsWithTag("Spawn_Overworld");
+                foreach(var spawner in spawnOver) {
+                    spawner.GetComponent<Enemy_Spawn_Behavior>().Start();
+                }
+            }
         }
         if(Input.GetMouseButtonDown(0) && !animator.GetBool("Hurt")){
             attack();
@@ -93,9 +133,6 @@ public class PlayerMovement : MonoBehaviour
                 isGrounded = true;
                 isJumping = false;
             }
-            // else{
-            //     return;
-            // }
         }
 
         if(otherObject.CompareTag("Underworld_Foreground_LEFT") || otherObject.CompareTag("Underworld_Foreground_RIGHT") 
@@ -111,29 +148,41 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             isJumping = false;
         }
+        if(otherObject.CompareTag("Enemy")){
+            animator.SetBool("Hurt", true);
+            hit_points -= 1;
+        }
         if(otherObject.CompareTag("Skeleton")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Skeleton", true);
+            hit_points -= 1;
         }
         if(otherObject.CompareTag("Mushroom")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Mushroom", true);
+            hit_points -= 1;
         }
         if(otherObject.CompareTag("Flying_Eye")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Flying_Eye", true);
+            hit_points -= 1;
         }
         if(otherObject.CompareTag("Goblin")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Goblin", true);
+            hit_points -= 1;
         }
         if(otherObject.CompareTag("Knight_No_Helmet")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Knight_No_Helmet", true);
+            hit_points -= 1;
         }
         if(otherObject.CompareTag("Knight_Full_Armor")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Knight_Full_Armor", true);
+            hit_points -= 1;
         }
         if(otherObject.CompareTag("Huntress_Spear")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Huntress_Spear", true);
+            hit_points -= 1;
         }
         if(otherObject.CompareTag("Huntress_Bow")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Huntress_Bow", true);
+            hit_points -= 1;
         }
     }
     void OnTriggerExit2D(Collider2D otherObject)
@@ -150,6 +199,9 @@ public class PlayerMovement : MonoBehaviour
         if(otherObject.name.Contains("Platform") && !isJumping){
             animator.SetBool("Falling", true);
             myFallTween = transform.DOMoveY(OVERWORLD_Y, 0.75f, false);
+        }
+        if(otherObject.CompareTag("Enemy")){
+            animator.SetBool("Hurt", false);
         }
         if(otherObject.CompareTag("Skeleton")){
             iterateEnemies_and_startAttacks(all_Enemies, enemy_Animator, "Skeleton", false);
@@ -186,6 +238,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if(enemies_Animator.GetBool("Attacking") && !animator.GetBool("Attacking")){
                 animator.SetBool("Hurt", setTrue_OR_False);
+                hit_points -= 1;
                 if(!setTrue_OR_False){
                     enemies_Animator.SetBool("Attacking", false);
                 }
@@ -228,6 +281,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Jumping", false);
         }
         else if(isGrounded){
+            jump_grunt.Play();
             myJumpTween = transform.DOJump(new Vector2(x, y), force, 1, duration, false);
             animator.SetBool("Jumping", true);
             isJumping = true;

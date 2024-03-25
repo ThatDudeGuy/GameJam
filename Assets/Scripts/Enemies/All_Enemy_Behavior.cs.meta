@@ -3,7 +3,12 @@ guid: 77eaf7f95fa730748b1f1b15c094db9b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - knight_death_sound: {fileID: 1140301653483695265, guid: ef088f7353e8db841aedeaaa7b87ce80, type: 3}
+  - huntress_death_sound: {fileID: -3976711465195152501, guid: 2abfb633d22c72e4087e1086ec080cba, type: 3}
+  - demon_death_sound: {fileID: 1969743448690129852, guid: 43f45aa8cf24f4b4ab8fe1e3eed22035, type: 3}
+  - enemy_Animator: {instanceID: 0}
+  - playerAnimator: {instanceID: 0}
   executionOrder: -1
   icon: {instanceID: 0}
   userData: 
